@@ -75,7 +75,10 @@ public bool allowBubbleRespawn = true;
         EvaluateSelectedAnswer();
     }
 
-
+public QuestionData GetCurrentQuestion()
+{
+    return currentQuestion;
+}
 
     private void EvaluateSelectedAnswer()
     {

@@ -12,14 +12,13 @@ public class BubbleFloat : MonoBehaviour
     private Vector2 basePosition;
     private float randomOffset;
 
-    void Start()
+    void OnEnable()
     {
-        rt = GetComponent<RectTransform>();
+        if (rt == null)
+            rt = GetComponent<RectTransform>();
+
         basePosition = rt.anchoredPosition;
-
-        // 🎲 Random upward speed per bubble
         floatSpeed = Random.Range(minSpeed, maxSpeed);
-
         randomOffset = Random.Range(0f, 2f * Mathf.PI);
     }
 
@@ -29,6 +28,11 @@ public class BubbleFloat : MonoBehaviour
 
         float sway = Mathf.Sin(Time.time * swayFrequency + randomOffset) * swayAmplitude;
         rt.anchoredPosition = new Vector2(basePosition.x + sway, basePosition.y);
-        
+
+        if (rt.anchoredPosition.y > 300f)
+        {
+            gameObject.SetActive(false);
+            FindObjectOfType<BubbleSpawner>().RespawnBubble(gameObject);
+        }
     }
 }
