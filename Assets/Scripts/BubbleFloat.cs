@@ -32,7 +32,7 @@ public class BubbleFloat : MonoBehaviour
         if (rt.anchoredPosition.y > 300f)
         {
             gameObject.SetActive(false);
-            FindObjectOfType<BubbleSpawner>().RespawnBubble(gameObject);
+             FindObjectOfType<BubbleSpawner>().RespawnSpecificWordFromBubble(gameObject);
         }
     }
 }

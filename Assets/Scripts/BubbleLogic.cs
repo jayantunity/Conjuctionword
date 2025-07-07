@@ -23,17 +23,21 @@ public class BubbleLogic : MonoBehaviour
 
 public void Click()
 {
-    if (bubbleAnimator != null)
-        bubbleAnimator.SetTrigger("Pop");
+        if (bubbleAnimator != null)
+        {
+            UnityEngine.Debug.LogError("popppp");
+           // bubbleAnimator.SetTrigger("Pop");
+        }
 
     if (blastEffectPrefab != null)
-    {
-        GameObject effect = Instantiate(blastEffectPrefab, transform.position, Quaternion.identity, transform.parent);
-        Destroy(effect, 2f);
-    }
+            {
+                 UnityEngine.Debug.LogError("popppp2");
+                GameObject effect = Instantiate(blastEffectPrefab, transform.position, Quaternion.identity, transform.parent);
+                Destroy(effect, 10f);
+            }
 
     OnBubbleClicked?.Invoke(word, this);
-    bubbleButton.interactable = false;
+    //bubbleButton.interactable = false;
 }
 
     public void SetWord(string newWord, bool correct)

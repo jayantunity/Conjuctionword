@@ -7,30 +7,33 @@ public class BubbleSpawner : MonoBehaviour
     public GameObject bubblePrefab;
     public RectTransform spawnArea;
     public GameManager gameManager;
-
+    private Dictionary<string, GameObject> wordToBubble = new Dictionary<string, GameObject>();
+    private QuestionData currentQuestion;
     private Coroutine spawnCoroutine;
     private List<GameObject> activeBubbles = new List<GameObject>();
+
 
     public void Spawn(QuestionData question)
     {
         ClearBubbles();
+        currentQuestion = question;
 
-        List<string> words = new List<string>(question.options);
         RectTransform area = spawnArea;
-        Vector2 areaSize = area.rect.size;
-        float padding = 100f;
-        float totalWidth = areaSize.x - (2 * padding);
-        float spacing = (words.Count > 1) ? totalWidth / (words.Count - 1) : 0;
+        float y = -area.rect.height - Random.Range(100f, 250f);
 
-        for (int i = 0; i < words.Count; i++)
+        wordToBubble.Clear();
+
+        foreach (string word in question.options)
         {
             GameObject bubble = Instantiate(bubblePrefab, spawnArea);
-            activeBubbles.Add(bubble);
+            bubble.SetActive(true);
 
-            SetupBubble(bubble, words[i], question);
-            float y = -areaSize.y - Random.Range(100f, 250f);
+            SetupBubble(bubble, word, question);
             Vector2 pos = TryGetNonOverlappingPosition(y);
             bubble.GetComponent<RectTransform>().anchoredPosition = pos;
+
+            wordToBubble[word] = bubble;
+            activeBubbles.Add(bubble);
         }
     }
     void SetupBubble(GameObject bubble, string word, QuestionData question)
@@ -43,9 +46,23 @@ public class BubbleSpawner : MonoBehaviour
         logic.OnBubbleClicked = (selectedWord, bubbleLogic) =>
         {
             gameManager.OnWordSelected(selectedWord);
-            StartCoroutine(RespawnBubbleAfterDelay(bubbleLogic.gameObject, question));
+            StartCoroutine(RespawnSpecificWordAfterDelay(selectedWord));
         };
     }
+
+IEnumerator RespawnSpecificWordAfterDelay(string word)
+{
+    yield return new WaitForSeconds(5f);
+    if (!wordToBubble.ContainsKey(word)) yield break;
+
+    GameObject bubble = wordToBubble[word];
+    bubble.SetActive(false);
+    yield return new WaitForSeconds(0.5f);
+
+    Vector2 pos = TryGetNonOverlappingPosition(-spawnArea.rect.height - Random.Range(100f, 250f));
+    bubble.GetComponent<RectTransform>().anchoredPosition = pos;
+    bubble.SetActive(true);
+}
     public void RespawnBubble(GameObject bubble)
     {
         if (!gameManager.allowBubbleRespawn) return;
@@ -57,11 +74,22 @@ public class BubbleSpawner : MonoBehaviour
         SetupBubble(bubble, randomWord, question);
 
         float y = -spawnArea.rect.height - Random.Range(100f, 250f);
-Vector2 pos = TryGetNonOverlappingPosition(y);
-bubble.GetComponent<RectTransform>().anchoredPosition = pos;
+        Vector2 pos = TryGetNonOverlappingPosition(y);
+        bubble.GetComponent<RectTransform>().anchoredPosition = pos;
 
         bubble.SetActive(true);
     }
+    public void RespawnSpecificWordFromBubble(GameObject bubble)
+{
+    foreach (var kvp in wordToBubble)
+    {
+        if (kvp.Value == bubble)
+        {
+            StartCoroutine(RespawnSpecificWordAfterDelay(kvp.Key));
+            break;
+        }
+    }
+}
     private Vector2 TryGetNonOverlappingPosition(float y, float minDistance = 150f, int maxAttempts = 20)
     {
         RectTransform area = spawnArea;
@@ -171,15 +199,17 @@ bubble.GetComponent<RectTransform>().anchoredPosition = pos;
         return true; // All bubbles are offscreen or deactivated
     }
 
-    void ClearBubbles()
+   void ClearBubbles()
+{
+    foreach (GameObject bubble in wordToBubble.Values)
     {
-        foreach (Transform child in spawnArea)
-        {
-            Destroy(child.gameObject);
-        }
-
-        activeBubbles.Clear();
+        if (bubble != null)
+            bubble.SetActive(false);
     }
+
+    activeBubbles.Clear();
+    wordToBubble.Clear();
+}
 
     IEnumerator DestroyAfterFeedback(GameObject bubble)
     {
