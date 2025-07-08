@@ -26,18 +26,18 @@ public void Click()
         if (bubbleAnimator != null)
         {
             UnityEngine.Debug.LogError("popppp");
-           // bubbleAnimator.SetTrigger("Pop");
+            bubbleAnimator.SetTrigger("Pop");
         }
 
-    if (blastEffectPrefab != null)
-            {
-                 UnityEngine.Debug.LogError("popppp2");
-                GameObject effect = Instantiate(blastEffectPrefab, transform.position, Quaternion.identity, transform.parent);
-                Destroy(effect, 10f);
-            }
+    // if (blastEffectPrefab != null)
+    //         {
+    //              UnityEngine.Debug.LogError("popppp2");
+    //             GameObject effect = Instantiate(blastEffectPrefab, transform.position, Quaternion.identity, transform.parent);
+    //             Destroy(effect, 10f);
+    //         }
 
     OnBubbleClicked?.Invoke(word, this);
-    //bubbleButton.interactable = false;
+   // bubbleButton.interactable = false;
 }
 
     public void SetWord(string newWord, bool correct)
@@ -49,6 +49,6 @@ public void Click()
 
     public void DisableBubble()
     {
-        bubbleButton.interactable = false;
+       // bubbleButton.interactable = false;
     }
 }
