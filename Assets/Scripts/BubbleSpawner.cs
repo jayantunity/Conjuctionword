@@ -12,7 +12,11 @@ public class BubbleSpawner : MonoBehaviour
     private Coroutine spawnCoroutine;
     private List<GameObject> activeBubbles = new List<GameObject>();
 
-
+    public static BubbleSpawner Instance;
+    void Awake()
+    {
+        Instance = this;
+    }
     public void Spawn(QuestionData question)
     {
         ClearBubbles();
@@ -25,15 +29,24 @@ public class BubbleSpawner : MonoBehaviour
 
         foreach (string word in question.options)
         {
+
+
             GameObject bubble = Instantiate(bubblePrefab, spawnArea);
-            bubble.SetActive(true);
+            bubble.SetActive(false); // ✅ Deactivate first to avoid Update running early
 
             SetupBubble(bubble, word, question);
             Vector2 pos = TryGetNonOverlappingPosition(y);
             bubble.GetComponent<RectTransform>().anchoredPosition = pos;
+            bubble.GetComponent<BubbleFloat>()?.ResetFloat(pos); // ✅ Reset before activating
+
+            bubble.SetActive(true); // ✅ Activate AFTER positioning and float reset
 
             wordToBubble[word] = bubble;
             activeBubbles.Add(bubble);
+
+
+
+
         }
     }
     void SetupBubble(GameObject bubble, string word, QuestionData question)
@@ -50,17 +63,47 @@ public class BubbleSpawner : MonoBehaviour
         };
     }
 
-IEnumerator RespawnSpecificWordAfterDelay(string word)
+    IEnumerator RespawnSpecificWordAfterDelay1(string word)
+    {
+        yield return new WaitForSeconds(0.05f);
+        if (!wordToBubble.ContainsKey(word)) yield break;
+
+        GameObject bubble = wordToBubble[word];
+                    UnityEngine.Debug.LogError("deactivate2222 " +word);
+        bubble.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
+
+        Vector2 pos = TryGetNonOverlappingPosition(-spawnArea.rect.height - Random.Range(100f, 250f));
+        bubble.GetComponent<RectTransform>().anchoredPosition = pos;
+        bubble.GetComponent<BubbleFloat>()?.ResetFloat(pos);
+        bubble.SetActive(true);
+    }
+
+    IEnumerator RespawnSpecificWordAfterDelay(string word)
 {
     yield return new WaitForSeconds(5f);
+
     if (!wordToBubble.ContainsKey(word)) yield break;
 
     GameObject bubble = wordToBubble[word];
-    bubble.SetActive(false);
-    yield return new WaitForSeconds(0.5f);
 
+    // Always deactivate immediately before repositioning
+    bubble.SetActive(false);
+
+    // ⏳ Wait is fine here, since it's already hidden
+    yield return new WaitForSeconds(0.1f);
+
+    // Reposition safely BEFORE activating
     Vector2 pos = TryGetNonOverlappingPosition(-spawnArea.rect.height - Random.Range(100f, 250f));
-    bubble.GetComponent<RectTransform>().anchoredPosition = pos;
+    var rect = bubble.GetComponent<RectTransform>();
+    if (rect != null) rect.anchoredPosition = pos;
+
+    // Reset float BEFORE activating
+    var floatScript = bubble.GetComponent<BubbleFloat>();
+    if (floatScript != null)
+        floatScript.ResetFloat(pos);
+
+    // ✅ Now safely reactivate
     bubble.SetActive(true);
 }
     public void RespawnBubble(GameObject bubble)
@@ -80,16 +123,16 @@ IEnumerator RespawnSpecificWordAfterDelay(string word)
         bubble.SetActive(true);
     }
     public void RespawnSpecificWordFromBubble(GameObject bubble)
-{
-    foreach (var kvp in wordToBubble)
     {
-        if (kvp.Value == bubble)
+        foreach (var kvp in wordToBubble)
         {
-            StartCoroutine(RespawnSpecificWordAfterDelay(kvp.Key));
-            break;
+            if (kvp.Value == bubble)
+            {
+                StartCoroutine(RespawnSpecificWordAfterDelay(kvp.Key));
+                break;
+            }
         }
     }
-}
     private Vector2 TryGetNonOverlappingPosition(float y, float minDistance = 150f, int maxAttempts = 20)
     {
         RectTransform area = spawnArea;
@@ -199,23 +242,27 @@ IEnumerator RespawnSpecificWordAfterDelay(string word)
         return true; // All bubbles are offscreen or deactivated
     }
 
-   void ClearBubbles()
-{
-    foreach (GameObject bubble in wordToBubble.Values)
+    void ClearBubbles()
     {
-        if (bubble != null)
-            bubble.SetActive(false);
-    }
+        foreach (GameObject bubble in wordToBubble.Values)
+        {
+            if (bubble != null)
+            {
+                UnityEngine.Debug.LogError("deactivate444" + bubble.GetComponent<BubbleLogic>().wordText.text);
+                bubble.SetActive(false);
+            }
+        }
 
-    activeBubbles.Clear();
-    wordToBubble.Clear();
-}
+        activeBubbles.Clear();
+        wordToBubble.Clear();
+    }
 
     IEnumerator DestroyAfterFeedback(GameObject bubble)
     {
         yield return new WaitForSeconds(2f);
         if (bubble != null)
         {
+             UnityEngine.Debug.LogError("deactivate333" +bubble.GetComponent<BubbleLogic>().wordText.text);
             Destroy(bubble);
         }
     }
