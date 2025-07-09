@@ -31,6 +31,7 @@ public class BubbleFloat : MonoBehaviour
 
         if (rt.anchoredPosition.y > 300f)
         {
+            UnityEngine.Debug.LogError("deactivating"+this.GetComponent<BubbleLogic>().wordText.text);
             gameObject.SetActive(false);
              FindObjectOfType<BubbleSpawner>().RespawnSpecificWordFromBubble(gameObject);
         }

@@ -2,249 +2,596 @@
   {
     "sentence": "I was tired ___ I went to bed.",
     "correctAnswer": "so",
-    "options": ["and", "but", "so", "cat"],
-    "explanation": "'So' shows cause and effect.",
+    "options": [
+      "and",
+      "but",
+      "so",
+      "cat"
+    ],
+    "explanations": {
+      "and": "'And' joins similar or related ideas.",
+      "but": "'But' shows contrast or opposite ideas.",
+      "so": "'So' shows cause and effect.",
+      "cat": "'cat' is not a valid conjunction."
+    },
     "topic": "conjunction"
   },
   {
-    "sentence": "He didn’t study, ___ he failed the test.",
+    "sentence": "He didn\u2019t study, ___ he failed the test.",
     "correctAnswer": "so",
-    "options": ["or", "and", "so", "because"],
-    "explanation": "'So' connects cause and result.",
+    "options": [
+      "or",
+      "and",
+      "so",
+      "because"
+    ],
+    "explanations": {
+      "or": "'Or' is used for a choice.",
+      "and": "'And' joins similar or related ideas.",
+      "so": "'So' connects cause and result.",
+      "because": "'Because' gives a reason."
+    },
     "topic": "conjunction"
   },
   {
     "sentence": "You can have tea ___ coffee.",
     "correctAnswer": "or",
-    "options": ["and", "so", "or", "because"],
-    "explanation": "'Or' is used for a choice.",
+    "options": [
+      "and",
+      "so",
+      "or",
+      "because"
+    ],
+    "explanations": {
+      "and": "'And' joins similar or related ideas.",
+      "so": "'So' shows cause and effect.",
+      "or": "'Or' is used for a choice.",
+      "because": "'Because' gives a reason."
+    },
     "topic": "conjunction"
   },
   {
     "sentence": "She was ill, ___ she went to the doctor.",
     "correctAnswer": "so",
-    "options": ["but", "so", "or", "because"],
-    "explanation": "'So' indicates result of being ill.",
+    "options": [
+      "but",
+      "so",
+      "or",
+      "because"
+    ],
+    "explanations": {
+      "but": "'But' shows contrast or opposite ideas.",
+      "so": "'So' indicates result of being ill.",
+      "or": "'Or' is used for a choice.",
+      "because": "'Because' gives a reason."
+    },
     "topic": "conjunction"
   },
   {
-    "sentence": "He tried hard, ___ he didn’t succeed.",
+    "sentence": "He tried hard, ___ he didn\u2019t succeed.",
     "correctAnswer": "but",
-    "options": ["and", "so", "but", "yet"],
-    "explanation": "'But' shows contrast.",
+    "options": [
+      "and",
+      "so",
+      "but",
+      "yet"
+    ],
+    "explanations": {
+      "and": "'And' joins similar or related ideas.",
+      "so": "'So' shows cause and effect.",
+      "but": "'But' shows contrast.",
+      "yet": "'Yet' introduces an unexpected result."
+    },
     "topic": "conjunction"
   },
   {
     "sentence": "I will go for a walk ___ it doesn't rain.",
     "correctAnswer": "if",
-    "options": ["or", "and", "if", "so"],
-    "explanation": "'If' shows condition.",
+    "options": [
+      "or",
+      "and",
+      "if",
+      "so"
+    ],
+    "explanations": {
+      "or": "'Or' is used for a choice.",
+      "and": "'And' joins similar or related ideas.",
+      "if": "'If' shows condition.",
+      "so": "'So' shows cause and effect."
+    },
     "topic": "conjunction"
   },
   {
     "sentence": "I like both tea ___ coffee.",
     "correctAnswer": "and",
-    "options": ["but", "or", "and", "so"],
-    "explanation": "'And' joins similar ideas.",
+    "options": [
+      "but",
+      "or",
+      "and",
+      "so"
+    ],
+    "explanations": {
+      "but": "'But' shows contrast or opposite ideas.",
+      "or": "'Or' is used for a choice.",
+      "and": "'And' joins similar ideas.",
+      "so": "'So' shows cause and effect."
+    },
     "topic": "conjunction"
   },
   {
     "sentence": "She is poor ___ honest.",
     "correctAnswer": "but",
-    "options": ["so", "and", "but", "or"],
-    "explanation": "'But' contrasts poor and honest.",
+    "options": [
+      "so",
+      "and",
+      "but",
+      "or"
+    ],
+    "explanations": {
+      "so": "'So' shows cause and effect.",
+      "and": "'And' joins similar or related ideas.",
+      "but": "'But' contrasts poor and honest.",
+      "or": "'Or' is used for a choice."
+    },
     "topic": "conjunction"
   },
   {
     "sentence": "He must be tired, ___ he kept running.",
     "correctAnswer": "yet",
-    "options": ["but", "so", "yet", "and"],
-    "explanation": "'Yet' shows contradiction.",
+    "options": [
+      "but",
+      "so",
+      "yet",
+      "and"
+    ],
+    "explanations": {
+      "but": "'But' shows contrast or opposite ideas.",
+      "so": "'So' shows cause and effect.",
+      "yet": "'Yet' shows contradiction.",
+      "and": "'And' joins similar or related ideas."
+    },
     "topic": "conjunction"
   },
   {
     "sentence": "We missed the bus ___ we left late.",
     "correctAnswer": "because",
-    "options": ["so", "yet", "because", "or"],
-    "explanation": "'Because' gives a reason.",
+    "options": [
+      "so",
+      "yet",
+      "because",
+      "or"
+    ],
+    "explanations": {
+      "so": "'So' shows cause and effect.",
+      "yet": "'Yet' introduces an unexpected result.",
+      "because": "'Because' gives a reason.",
+      "or": "'Or' is used for a choice."
+    },
     "topic": "conjunction"
   },
   {
     "sentence": "You can call me ___ you need help.",
     "correctAnswer": "if",
-    "options": ["and", "but", "if", "so"],
-    "explanation": "'If' shows condition.",
+    "options": [
+      "and",
+      "but",
+      "if",
+      "so"
+    ],
+    "explanations": {
+      "and": "'And' joins similar or related ideas.",
+      "but": "'But' shows contrast or opposite ideas.",
+      "if": "'If' shows condition.",
+      "so": "'So' shows cause and effect."
+    },
     "topic": "conjunction"
   },
   {
-    "sentence": "He was fast ___ he couldn’t win.",
+    "sentence": "He was fast ___ he couldn\u2019t win.",
     "correctAnswer": "but",
-    "options": ["and", "but", "so", "because"],
-    "explanation": "'But' shows contrast.",
+    "options": [
+      "and",
+      "but",
+      "so",
+      "because"
+    ],
+    "explanations": {
+      "and": "'And' joins similar or related ideas.",
+      "but": "'But' shows contrast.",
+      "so": "'So' shows cause and effect.",
+      "because": "'Because' gives a reason."
+    },
     "topic": "conjunction"
   },
   {
     "sentence": "They were late ___ the train was delayed.",
     "correctAnswer": "because",
-    "options": ["but", "so", "because", "and"],
-    "explanation": "'Because' explains reason.",
+    "options": [
+      "but",
+      "so",
+      "because",
+      "and"
+    ],
+    "explanations": {
+      "but": "'But' shows contrast or opposite ideas.",
+      "so": "'So' shows cause and effect.",
+      "because": "'Because' explains reason.",
+      "and": "'And' joins similar or related ideas."
+    },
     "topic": "conjunction"
   },
   {
     "sentence": "Finish your food ___ you will not get dessert.",
     "correctAnswer": "or",
-    "options": ["and", "but", "or", "so"],
-    "explanation": "'Or' gives consequence of not doing something.",
+    "options": [
+      "and",
+      "but",
+      "or",
+      "so"
+    ],
+    "explanations": {
+      "and": "'And' joins similar or related ideas.",
+      "but": "'But' shows contrast or opposite ideas.",
+      "or": "'Or' gives consequence of not doing something.",
+      "so": "'So' shows cause and effect."
+    },
     "topic": "conjunction"
   },
   {
     "sentence": "He is smart ___ lazy.",
     "correctAnswer": "but",
-    "options": ["and", "or", "so", "but"],
-    "explanation": "'But' shows a contrast between traits.",
+    "options": [
+      "and",
+      "or",
+      "so",
+      "but"
+    ],
+    "explanations": {
+      "and": "'And' joins similar or related ideas.",
+      "or": "'Or' is used for a choice.",
+      "so": "'So' shows cause and effect.",
+      "but": "'But' shows a contrast between traits."
+    },
     "topic": "conjunction"
   },
   {
     "sentence": "She wanted to dance ___ sing.",
     "correctAnswer": "and",
-    "options": ["and", "but", "so", "yet"],
-    "explanation": "'And' connects similar desires.",
+    "options": [
+      "and",
+      "but",
+      "so",
+      "yet"
+    ],
+    "explanations": {
+      "and": "'And' connects similar desires.",
+      "but": "'But' shows contrast or opposite ideas.",
+      "so": "'So' shows cause and effect.",
+      "yet": "'Yet' introduces an unexpected result."
+    },
     "topic": "conjunction"
   },
   {
     "sentence": "Do you want juice ___ soda?",
     "correctAnswer": "or",
-    "options": ["and", "or", "but", "so"],
-    "explanation": "'Or' offers a choice.",
+    "options": [
+      "and",
+      "or",
+      "but",
+      "so"
+    ],
+    "explanations": {
+      "and": "'And' joins similar or related ideas.",
+      "or": "'Or' offers a choice.",
+      "but": "'But' shows contrast or opposite ideas.",
+      "so": "'So' shows cause and effect."
+    },
     "topic": "conjunction"
   },
   {
     "sentence": "He was tired ___ kept working.",
     "correctAnswer": "but",
-    "options": ["so", "yet", "and", "but"],
-    "explanation": "'But' contrasts expectation.",
+    "options": [
+      "so",
+      "yet",
+      "and",
+      "but"
+    ],
+    "explanations": {
+      "so": "'So' shows cause and effect.",
+      "yet": "'Yet' introduces an unexpected result.",
+      "and": "'And' joins similar or related ideas.",
+      "but": "'But' contrasts expectation."
+    },
     "topic": "conjunction"
   },
   {
     "sentence": "We went home ___ it started raining.",
     "correctAnswer": "because",
-    "options": ["so", "because", "and", "or"],
-    "explanation": "'Because' gives a reason.",
+    "options": [
+      "so",
+      "because",
+      "and",
+      "or"
+    ],
+    "explanations": {
+      "so": "'So' shows cause and effect.",
+      "because": "'Because' gives a reason.",
+      "and": "'And' joins similar or related ideas.",
+      "or": "'Or' is used for a choice."
+    },
     "topic": "conjunction"
   },
   {
     "sentence": "She smiled ___ she was happy.",
     "correctAnswer": "because",
-    "options": ["so", "but", "because", "or"],
-    "explanation": "'Because' shows cause.",
+    "options": [
+      "so",
+      "but",
+      "because",
+      "or"
+    ],
+    "explanations": {
+      "so": "'So' shows cause and effect.",
+      "but": "'But' shows contrast or opposite ideas.",
+      "because": "'Because' shows cause.",
+      "or": "'Or' is used for a choice."
+    },
     "topic": "conjunction"
   },
   {
     "sentence": "I will call you ___ I arrive.",
     "correctAnswer": "when",
-    "options": ["if", "but", "when", "and"],
-    "explanation": "'When' indicates time.",
+    "options": [
+      "if",
+      "but",
+      "when",
+      "and"
+    ],
+    "explanations": {
+      "if": "'If' shows condition.",
+      "but": "'But' shows contrast or opposite ideas.",
+      "when": "'When' indicates time.",
+      "and": "'And' joins similar or related ideas."
+    },
     "topic": "conjunction"
   },
   {
     "sentence": "We can go hiking ___ swimming.",
     "correctAnswer": "or",
-    "options": ["and", "so", "but", "or"],
-    "explanation": "'Or' offers a choice.",
+    "options": [
+      "and",
+      "so",
+      "but",
+      "or"
+    ],
+    "explanations": {
+      "and": "'And' joins similar or related ideas.",
+      "so": "'So' shows cause and effect.",
+      "but": "'But' shows contrast or opposite ideas.",
+      "or": "'Or' offers a choice."
+    },
     "topic": "conjunction"
   },
   {
     "sentence": "She cooked dinner ___ cleaned the kitchen.",
     "correctAnswer": "and",
-    "options": ["but", "so", "and", "yet"],
-    "explanation": "'And' joins two actions.",
+    "options": [
+      "but",
+      "so",
+      "and",
+      "yet"
+    ],
+    "explanations": {
+      "but": "'But' shows contrast or opposite ideas.",
+      "so": "'So' shows cause and effect.",
+      "and": "'And' joins two actions.",
+      "yet": "'Yet' introduces an unexpected result."
+    },
     "topic": "conjunction"
   },
   {
     "sentence": "I waited ___ she came.",
     "correctAnswer": "until",
-    "options": ["because", "until", "and", "so"],
-    "explanation": "'Until' shows time up to a point.",
+    "options": [
+      "because",
+      "until",
+      "and",
+      "so"
+    ],
+    "explanations": {
+      "because": "'Because' gives a reason.",
+      "until": "'Until' shows time up to a point.",
+      "and": "'And' joins similar or related ideas.",
+      "so": "'So' shows cause and effect."
+    },
     "topic": "conjunction"
   },
   {
     "sentence": "He ran fast ___ missed the bus.",
     "correctAnswer": "but",
-    "options": ["so", "but", "and", "or"],
-    "explanation": "'But' contrasts expected outcome.",
+    "options": [
+      "so",
+      "but",
+      "and",
+      "or"
+    ],
+    "explanations": {
+      "so": "'So' shows cause and effect.",
+      "but": "'But' contrasts expected outcome.",
+      "and": "'And' joins similar or related ideas.",
+      "or": "'Or' is used for a choice."
+    },
     "topic": "conjunction"
   },
-
-  // Add 25 more entries...
-
   {
     "sentence": "You will pass ___ you study.",
     "correctAnswer": "if",
-    "options": ["and", "so", "if", "or"],
-    "explanation": "'If' shows condition.",
+    "options": [
+      "and",
+      "so",
+      "if",
+      "or"
+    ],
+    "explanations": {
+      "and": "'And' joins similar or related ideas.",
+      "so": "'So' shows cause and effect.",
+      "if": "'If' shows condition.",
+      "or": "'Or' is used for a choice."
+    },
     "topic": "conjunction"
   },
   {
     "sentence": "She is tired ___ she keeps smiling.",
     "correctAnswer": "yet",
-    "options": ["so", "and", "but", "yet"],
-    "explanation": "'Yet' contrasts action with expectation.",
+    "options": [
+      "so",
+      "and",
+      "but",
+      "yet"
+    ],
+    "explanations": {
+      "so": "'So' shows cause and effect.",
+      "and": "'And' joins similar or related ideas.",
+      "but": "'But' shows contrast or opposite ideas.",
+      "yet": "'Yet' contrasts action with expectation."
+    },
     "topic": "conjunction"
   },
   {
     "sentence": "We played soccer ___ it started to rain.",
     "correctAnswer": "until",
-    "options": ["until", "but", "so", "if"],
-    "explanation": "'Until' indicates time duration.",
+    "options": [
+      "until",
+      "but",
+      "so",
+      "if"
+    ],
+    "explanations": {
+      "until": "'Until' indicates time duration.",
+      "but": "'But' shows contrast or opposite ideas.",
+      "so": "'So' shows cause and effect.",
+      "if": "'If' shows condition."
+    },
     "topic": "conjunction"
   },
   {
     "sentence": "He opened the door ___ saw no one.",
     "correctAnswer": "and",
-    "options": ["but", "and", "or", "so"],
-    "explanation": "'And' joins actions.",
+    "options": [
+      "but",
+      "and",
+      "or",
+      "so"
+    ],
+    "explanations": {
+      "but": "'But' shows contrast or opposite ideas.",
+      "and": "'And' joins actions.",
+      "or": "'Or' is used for a choice.",
+      "so": "'So' shows cause and effect."
+    },
     "topic": "conjunction"
   },
   {
-    "sentence": "Don’t touch the stove ___ it's hot.",
+    "sentence": "Don\u2019t touch the stove ___ it's hot.",
     "correctAnswer": "because",
-    "options": ["but", "or", "because", "and"],
-    "explanation": "'Because' gives a reason.",
+    "options": [
+      "but",
+      "or",
+      "because",
+      "and"
+    ],
+    "explanations": {
+      "but": "'But' shows contrast or opposite ideas.",
+      "or": "'Or' is used for a choice.",
+      "because": "'Because' gives a reason.",
+      "and": "'And' joins similar or related ideas."
+    },
     "topic": "conjunction"
   },
   {
     "sentence": "He was sleepy ___ he stayed awake.",
     "correctAnswer": "yet",
-    "options": ["but", "so", "yet", "or"],
-    "explanation": "'Yet' adds contrast.",
+    "options": [
+      "but",
+      "so",
+      "yet",
+      "or"
+    ],
+    "explanations": {
+      "but": "'But' shows contrast or opposite ideas.",
+      "so": "'So' shows cause and effect.",
+      "yet": "'Yet' adds contrast.",
+      "or": "'Or' is used for a choice."
+    },
     "topic": "conjunction"
   },
   {
-    "sentence": "She didn’t answer ___ she was angry.",
+    "sentence": "She didn\u2019t answer ___ she was angry.",
     "correctAnswer": "because",
-    "options": ["but", "so", "because", "yet"],
-    "explanation": "'Because' shows cause.",
+    "options": [
+      "but",
+      "so",
+      "because",
+      "yet"
+    ],
+    "explanations": {
+      "but": "'But' shows contrast or opposite ideas.",
+      "so": "'So' shows cause and effect.",
+      "because": "'Because' shows cause.",
+      "yet": "'Yet' introduces an unexpected result."
+    },
     "topic": "conjunction"
   },
   {
     "sentence": "They brought snacks ___ drinks.",
     "correctAnswer": "and",
-    "options": ["so", "or", "and", "but"],
-    "explanation": "'And' combines items.",
+    "options": [
+      "so",
+      "or",
+      "and",
+      "but"
+    ],
+    "explanations": {
+      "so": "'So' shows cause and effect.",
+      "or": "'Or' is used for a choice.",
+      "and": "'And' combines items.",
+      "but": "'But' shows contrast or opposite ideas."
+    },
     "topic": "conjunction"
   },
   {
     "sentence": "I lost my phone ___ my keys.",
     "correctAnswer": "and",
-    "options": ["and", "but", "so", "or"],
-    "explanation": "'And' adds additional item.",
+    "options": [
+      "and",
+      "but",
+      "so",
+      "or"
+    ],
+    "explanations": {
+      "and": "'And' adds additional item.",
+      "but": "'But' shows contrast or opposite ideas.",
+      "so": "'So' shows cause and effect.",
+      "or": "'Or' is used for a choice."
+    },
     "topic": "conjunction"
   },
   {
     "sentence": "Take your umbrella ___ it rains.",
     "correctAnswer": "in case",
-    "options": ["if", "in case", "so", "because"],
-    "explanation": "'In case' means in preparation for something.",
+    "options": [
+      "if",
+      "in case",
+      "so",
+      "because"
+    ],
+    "explanations": {
+      "if": "'If' shows condition.",
+      "in case": "'In case' means in preparation for something.",
+      "so": "'So' shows cause and effect.",
+      "because": "'Because' gives a reason."
+    },
     "topic": "conjunction"
   }
 ]

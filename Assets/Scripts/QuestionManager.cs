@@ -9,7 +9,7 @@ public class QuestionData
     public string sentence;
     public string correctAnswer;
     public List<string> options;
-    public string explanation;
+     public Dictionary<string, string> explanations;
     public string topic;
 }
 
