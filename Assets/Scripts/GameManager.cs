@@ -27,6 +27,11 @@ public class GameManager : MonoBehaviour
     public bool allowBubbleRespawn = true;
     public UnityEngine.UI.Button doneButtonUI;
     private Animator doneButtonAnimator;
+    public float questionTimeLimit = 20f;
+    private float currentTimeLeft;
+    private bool timerRunning = false;
+    public TMP_Text timerText;
+    public GameObject wordSlotUI;
 
     void Start()
     {
@@ -38,6 +43,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadNextQuestion()
     {
+         StopBlinking(); 
         currentQuestion = questionManager.GetRandomQuestion();
         if (currentQuestion == null) return;
 
@@ -48,12 +54,14 @@ public class GameManager : MonoBehaviour
         sentenceStart.text = parts[0];
         sentenceEnd.text = parts.Length > 1 ? parts[1] : "";
         //wordSlot.text = "_____";
-       wordSlot.text = "";
+        wordSlot.text = "";
         bubbleSpawner.Spawn(currentQuestion);
 
-        feedbackPanel.SetActive(false);
+        //   feedbackPanel.SetActive(false);
         wrongAttempts = 0;
         wordSelected = false;
+        currentTimeLeft = questionTimeLimit;
+        timerRunning = true;
         feedbackShown = false;
         isAnswerCorrect = false;
         playerAnswer = "";
@@ -71,24 +79,24 @@ public class GameManager : MonoBehaviour
         SetDoneButtonState(true);
     }
 
-void SetDoneButtonState(bool hasWord)
-{
-    ColorBlock cb = doneButtonUI.colors;
+    void SetDoneButtonState(bool hasWord)
+    {
+        ColorBlock cb = doneButtonUI.colors;
 
-    if (!hasWord)
-    {
-        cb.normalColor = new Color(1f, 1f, 1f, 0.6f); // light transparent white
-        doneButtonUI.colors = cb;
-        doneButtonAnimator.enabled = false;
+        if (!hasWord)
+        {
+            cb.normalColor = new Color(1f, 1f, 1f, 0.6f); // light transparent white
+            doneButtonUI.colors = cb;
+            doneButtonAnimator.enabled = false;
+        }
+        else
+        {
+            cb.normalColor = Color.white;
+            doneButtonUI.colors = cb;
+            doneButtonAnimator.enabled = true;
+            doneButtonAnimator.Play("Blink", -1, 0); // restart blinking
+        }
     }
-    else
-    {
-        cb.normalColor = Color.white;
-        doneButtonUI.colors = cb;
-        doneButtonAnimator.enabled = true;
-        doneButtonAnimator.Play("Blink", -1, 0); // restart blinking
-    }
-}
 
 
     // Called when Done button is clicked
@@ -132,46 +140,112 @@ void SetDoneButtonState(bool hasWord)
         ShowFeedback(isAnswerCorrect);
     }
 
-   void ShowFeedback(bool correct)
-{
-    feedbackPanel.SetActive(true);
-    okButton.SetActive(true);
+    void ShowFeedback(bool correct)
+    {
+        timerRunning = false; // pause
 
-    string explanationText;
+        // feedbackPanel.SetActive(true);
+        okButton.SetActive(true);
 
-    if (currentQuestion.explanations != null &&
-        currentQuestion.explanations.ContainsKey(playerAnswer))
-    {
-        explanationText = currentQuestion.explanations[playerAnswer];
-    }
-    else
-    {
-        explanationText = "No explanation found.";
-    }
+        string explanationText;
 
-    if (correct)
-    {
-        feedbackText.text = $"✅ Correct!\n\n{explanationText}";
+        if (currentQuestion.explanations != null &&
+            currentQuestion.explanations.ContainsKey(playerAnswer))
+        {
+            explanationText = currentQuestion.explanations[playerAnswer];
+        }
+        else
+        {
+            explanationText = "No explanation found.";
+        }
+
+        if (correct)
+        {
+            feedbackText.text = $"Correct!\n\n{explanationText}";
+        }
+        else if (wrongAttempts >= 2)
+        {
+            feedbackText.text = $" Incorrect.\n\n{explanationText}\n\nMoving to next question.";
+        }
+        else
+        {
+            feedbackText.text = $" Incorrect.\n\n{explanationText}\n\nTry again!";
+        }
+        feedbackPanel.GetComponent<FeedBackPanel>().ShowPanel();
     }
-    else if (wrongAttempts >= 2)
-    {
-        feedbackText.text = $"❌ Incorrect.\n\n{explanationText}\n\nMoving to next question.";
-    }
-    else
-    {
-        feedbackText.text = $"❌ Incorrect.\n\n{explanationText}\n\nTry again!";
-    }
-}
 
     public void OnOkButtonClicked()
     {
-        feedbackPanel.SetActive(false);
+        //  feedbackPanel.SetActive(false);
 
-        if (isAnswerCorrect || wrongAttempts >= 2)
+
+        if (isAnswerCorrect || wrongAttempts >= 2 || currentTimeLeft <= 0f)
         {
+            timerRunning = false;
             LoadNextQuestion();
         }
+        else if (currentTimeLeft > 0f)
+        {
+            timerRunning = true; // resume
+            feedbackShown = false;
+        }
         wordSlot.text = "";
+        feedbackPanel.GetComponent<FeedBackPanel>().HidePanel();
         // Else: retry allowed (player can click another bubble)
     }
+    bool isBlinking;
+    Coroutine blinkCoroutine;
+    void Update()
+    {
+        if (timerRunning && !feedbackShown)
+        {
+            currentTimeLeft -= Time.deltaTime;
+
+            // Optional: Update timer UI
+            if (currentTimeLeft <= 5f && !isBlinking)
+            {
+                isBlinking = true;
+                blinkCoroutine = StartCoroutine(BlinkWordSlot());
+            }
+            timerText.text = "Time: " + Mathf.CeilToInt(currentTimeLeft).ToString() + "s";
+
+            if (currentTimeLeft <= 0f)
+            {
+                timerRunning = false;
+                feedbackShown = true;
+                allowBubbleRespawn = false;
+
+                feedbackText.text = "Time's up!\nMoving to next question.";
+                feedbackPanel.GetComponent<FeedBackPanel>().ShowPanel();
+                okButton.SetActive(true);
+            }
+        }
+    }
+    CanvasGroup cg;
+    IEnumerator BlinkWordSlot()
+    {
+      cg = wordSlotUI.GetComponent<CanvasGroup>();
+        if (cg == null)
+        {
+            cg = wordSlotUI.AddComponent<CanvasGroup>();
+        }
+
+        while (true)
+        {
+            cg.alpha = 0.2f;
+            yield return new WaitForSeconds(0.3f);
+            cg.alpha = 1f;
+            yield return new WaitForSeconds(0.3f);
+        }
+    }
+void StopBlinking()
+{
+    if (blinkCoroutine != null)
+        StopCoroutine(blinkCoroutine);
+
+    isBlinking = false;
+
+    //CanvasGroup cg = wordSlotUI.GetComponent<CanvasGroup>();
+    if (cg != null) cg.alpha = 1f;
+}
 }

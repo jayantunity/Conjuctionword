@@ -21,16 +21,17 @@ public class BubbleFloat : MonoBehaviour
     }
 
     public void ResetFloat(Vector2 startPosition)
-    {
-        basePosition = startPosition;
-        if (rt == null)
-            rt = GetComponent<RectTransform>();
+{
+    if (rt == null)
+        rt = GetComponent<RectTransform>();
 
-        rt.anchoredPosition = startPosition;
-        floatSpeed = Random.Range(minSpeed, maxSpeed);
-        randomOffset = Random.Range(0f, 2f * Mathf.PI);
-        initialized = true;
-    }
+    rt.anchoredPosition = startPosition;
+    basePosition = startPosition;
+
+    floatSpeed = Random.Range(minSpeed, maxSpeed);
+    randomOffset = Random.Range(0f, 2f * Mathf.PI);
+    initialized = true;
+}
 
     void Update()
     {

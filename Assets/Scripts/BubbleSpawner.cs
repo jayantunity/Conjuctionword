@@ -78,32 +78,26 @@ public class BubbleSpawner : MonoBehaviour
         bubble.GetComponent<BubbleFloat>()?.ResetFloat(pos);
         bubble.SetActive(true);
     }
-
-    IEnumerator RespawnSpecificWordAfterDelay(string word)
+IEnumerator RespawnSpecificWordAfterDelay(string word)
 {
-    yield return new WaitForSeconds(5f);
+    yield return new WaitForSeconds(0.5f); // or 0.05f, minimal delay for animation if needed
 
     if (!wordToBubble.ContainsKey(word)) yield break;
 
     GameObject bubble = wordToBubble[word];
-
-    // Always deactivate immediately before repositioning
     bubble.SetActive(false);
 
-    // ⏳ Wait is fine here, since it's already hidden
-    yield return new WaitForSeconds(0.1f);
+    yield return null; // just 1 frame delay is enough
 
-    // Reposition safely BEFORE activating
-    Vector2 pos = TryGetNonOverlappingPosition(-spawnArea.rect.height - Random.Range(100f, 250f));
+    float spawnY = -spawnArea.rect.height / 2f - Random.Range(30f, 60f);
+    Vector2 pos = TryGetNonOverlappingPosition(spawnY);
+
     var rect = bubble.GetComponent<RectTransform>();
     if (rect != null) rect.anchoredPosition = pos;
 
-    // Reset float BEFORE activating
     var floatScript = bubble.GetComponent<BubbleFloat>();
-    if (floatScript != null)
-        floatScript.ResetFloat(pos);
+    if (floatScript != null) floatScript.ResetFloat(pos);
 
-    // ✅ Now safely reactivate
     bubble.SetActive(true);
 }
     public void RespawnBubble(GameObject bubble)
